@@ -1,0 +1,45 @@
+spring:
+  application:
+    name: speech
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:h2:file:C:/OfflineTCE/data/db
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  hikari:
+    connection-timeout: 60000
+    maximum-pool-size: 20
+  jpa:
+    hibernate:
+      show-sql: false
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.H2Dialect
+          format_sql: true
+          jdbc:
+            time_zone: UTC
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+  flyway:
+    sql-migration-prefix: V
+    locations: classpath:db/migration
+    repeatable-sql-migration-prefix: R
+    log-sql: true
+logging:
+  level:
+    org:
+      springframework:
+        security: TRACE
+        web: TRACE
+  file:
+    name: /logs/salesforce-sync-api.log
+    max-size: 10MB
+    max-history: 7
+    max-days: 7
+    pattern:
+      file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
+      console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"

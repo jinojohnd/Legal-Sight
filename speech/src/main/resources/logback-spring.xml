@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <!-- Profile for dev or workspace -->
+  <springProfile name="workspace, dev">
+    <!-- Include default Spring Boot logback configuration -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+    <!-- Include console appender configuration -->
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <!-- Rolling File Appender -->
+    <appender name="ROLLING-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <encoder>
+        <pattern>${FILE_LOG_PATTERN}</pattern>
+      </encoder>
+      <file>${LOG_FILE}</file>
+      <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <!-- daily rollover -->
+        <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+      </rollingPolicy>
+    </appender>
+
+    <!-- Root logger with both Console and Rolling File appenders -->
+    <root level="INFO">
+      <appender-ref ref="CONSOLE" />
+      <appender-ref ref="ROLLING-FILE" />
+    </root>
+  </springProfile>
+
+  <!-- Profile for prod and nossl -->
+  <springProfile name="prod, nossl">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+
+    <appender name="ROLLING-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+      <encoder>
+        <pattern>${FILE_LOG_PATTERN}</pattern>
+      </encoder>
+      <file>${LOG_FILE}</file>
+      <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+        <fileNamePattern>${LOG_PATH}/log_%i.log</fileNamePattern>
+        <minIndex>2</minIndex>
+        <maxIndex>3</maxIndex>
+      </rollingPolicy>
+
+      <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+        <maxFileSize>10MB</maxFileSize>
+      </triggeringPolicy>
+    </appender>
+
+    <root level="INFO">
+      <appender-ref ref="ROLLING-FILE" />
+    </root>
+  </springProfile>
+</configuration>
