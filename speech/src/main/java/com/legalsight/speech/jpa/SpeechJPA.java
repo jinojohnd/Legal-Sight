@@ -34,7 +34,7 @@ public class SpeechJPA extends BaseJPA {
   @Column(name = "CONTENT", columnDefinition = "TEXT")
   private String content;
 
-  @OneToMany(mappedBy = "speech", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "speech", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<KeywordsJPA> keywords;
 
 }

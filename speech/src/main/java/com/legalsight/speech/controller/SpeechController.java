@@ -29,7 +29,8 @@ public class SpeechController {
       @RequestParam(required = false) String textSnippet,
       @RequestParam(required = false) List<String> keywords) {
 
-    speechService.searchSpeeches(author, startDate, endDate, textSnippet, keywords);
-    return ResponseEntity.ok(new ArrayList<>());
+    List<SpeechDTO> speechDTOS = speechService.searchSpeeches(author, startDate, endDate,
+        textSnippet, keywords);
+    return ResponseEntity.ok(speechDTOS);
   }
 }
