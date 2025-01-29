@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,7 @@ public class SpeechJPA extends BaseJPA {
 
   @NotNull
   @Column(name = "SPEECH_DATE", columnDefinition = "DATE")
-  private Date speechDate;
+  private LocalDate speechDate;
 
   @NotNull
   @Column(name = "CONTENT", columnDefinition = "TEXT")
