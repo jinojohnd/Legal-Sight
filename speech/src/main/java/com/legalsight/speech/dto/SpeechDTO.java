@@ -1,5 +1,7 @@
 package com.legalsight.speech.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.legalsight.speech.model.KeywordsDeserializer;
 import java.util.Date;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -16,5 +18,7 @@ public class SpeechDTO extends BaseDTO {
   private String author;
   private Date speechDate;
   private String content;
+
+  @JsonDeserialize(using = KeywordsDeserializer.class)
   private List<KeywordsDTO> keywords;
 }

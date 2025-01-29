@@ -30,11 +30,11 @@ public class JPASpecificationImpl<T> implements Specification<T> {
     List<Predicate> predicates = new ArrayList<>();
 
     for (SearchCriteria criteria : criteriaList) {
-      Path<Object> path = getPath(root, criteria.getKey());
       Object value = criteria.getValue();
       if (null == value) {
         continue;
       }
+      Path<Object> path = getPath(root, criteria.getKey());
       switch (criteria.getOperation()) {
         case GREATER_THAN:
           predicates.add(criteriaBuilder.greaterThan(path.as(String.class), value.toString()));
