@@ -13,4 +13,8 @@ public interface SpeechService {
   SpeechDTO getSpeech(UUID speechId);
 
   UUID saveSpeech(SpeechDTO speechDTO);
+
+  void editSpeech(SpeechDTO speechDTO) throws IllegalArgumentException;
+
+  void deleteSpeech(UUID id) throws IllegalArgumentException;
 }
