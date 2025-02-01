@@ -33,11 +33,11 @@ public class SpeechController {
   public ResponseEntity<List<SpeechDTO>> getSpeeches(@RequestParam(required = false) String author,
       @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
       @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
-      @RequestParam(required = false) String textSnippet,
+      @RequestParam(required = false) String content,
       @RequestParam(required = false) List<String> keywords) {
 
     List<SpeechDTO> speechDTOS = speechService.searchSpeeches(author, startDate, endDate,
-        textSnippet, keywords);
+        content, keywords);
     return ResponseEntity.ok(speechDTOS);
   }
 

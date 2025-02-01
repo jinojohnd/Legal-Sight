@@ -29,7 +29,7 @@ public class SpeechServiceImpl implements SpeechService {
 
   @Override
   public List<SpeechDTO> searchSpeeches(String author, Date startDate, Date endDate,
-      String textSnippet, List<String> keywords) {
+      String content, List<String> keywords) {
 
     SpeechJPASpec spec = new SpeechJPASpec();
     if (keywords != null && !keywords.isEmpty()) {
@@ -38,8 +38,8 @@ public class SpeechServiceImpl implements SpeechService {
     if (author != null && !author.isBlank()) {
       spec.addCriteria(new SearchCriteria("author", author, SearchOperation.LIKE));
     }
-    if (textSnippet != null && !textSnippet.isBlank()) {
-      spec.addCriteria(new SearchCriteria("content", textSnippet, SearchOperation.LIKE));
+    if (content != null && !content.isBlank()) {
+      spec.addCriteria(new SearchCriteria("content", content, SearchOperation.LIKE));
     }
 
     List<SpeechJPA> speeches = speechRepository.findAll(spec);

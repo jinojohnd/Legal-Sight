@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
   <!-- Profile for dev or workspace -->
-  <springProfile name="workspace, dev">
+  <springProfile name="workspace, dev, test">
     <!-- Include default Spring Boot logback configuration -->
     <include resource="org/springframework/boot/logging/logback/defaults.xml" />
 

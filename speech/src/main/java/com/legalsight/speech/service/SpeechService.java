@@ -8,7 +8,7 @@ import java.util.UUID;
 public interface SpeechService {
 
   List<SpeechDTO> searchSpeeches(String author, Date startDate, Date endDate,
-      String textSnippet, List<String> keywords);
+      String content, List<String> keywords);
 
   SpeechDTO getSpeech(UUID speechId);
 
