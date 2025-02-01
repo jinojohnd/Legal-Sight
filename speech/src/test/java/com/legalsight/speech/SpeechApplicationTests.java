@@ -132,12 +132,12 @@ public class SpeechApplicationTests {
     SpeechDTO retrievedSpeech = objectMapper.readValue(responseJson, SpeechDTO.class);
 
     if (speechEdited) {
-      // Assert the updated author (Jane Doe) if the speech has been edited
+      // Assert the updated author (Jane Doe)
       assertThat(retrievedSpeech.getAuthor()).isEqualTo("Jane Doe");
       assertThat(retrievedSpeech.getSpeechDate()).isEqualTo(LocalDate.of(2025, 1, 25));
       assertThat(retrievedSpeech.getContent()).isEqualTo("This is a test speech by Jane Doe.");
     } else {
-      // Assert the original author (John Doe) if the speech has not been edited
+      // Assert the original author (John Doe)
       assertThat(retrievedSpeech.getAuthor()).isEqualTo("John Doe");
       assertThat(retrievedSpeech.getSpeechDate()).isEqualTo(LocalDate.of(2024, 5, 20));
       assertThat(retrievedSpeech.getContent()).isEqualTo("This is a test speech.");
