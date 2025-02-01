@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "05930f21-0993-4ef2-9570-1975295eeb12",
+		"_postman_id": "23966ee9-e93f-4343-846f-a47fc53d023a",
 		"name": "LegalSight",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "19909826",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "41724436"
 	},
 	"item": [
 		{
@@ -45,7 +45,18 @@
 			"request": {
 				"method": "GET",
 				"header": [],
-				"url": "localhost:8080/speech/get-speech/f8c58b18-88ff-4518-aaf2-6e9eebd66d64",
+				"url": {
+					"raw": "localhost:8080/speech/get-speech/f8c58b18-88ff-4518-aaf2-6e9eebd66d64",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"speech",
+						"get-speech",
+						"f8c58b18-88ff-4518-aaf2-6e9eebd66d64"
+					]
+				},
 				"description": "The endpoint \"localhost:8080/speech/get-speech/{speechId}\" retrieves a speech with the specified ID.\n\nThe response for this request can be documented as a JSON schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\"type\": \"string\"},\n    \"author\": {\"type\": \"string\"},\n    \"speechDate\": {\"type\": \"string\"},\n    \"content\": {\"type\": \"string\"},\n    \"keywords\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"id\": {\"type\": \"string\"},\n          \"keyword\": {\"type\": \"string\"}\n        }\n      }\n    }\n  }\n}\n}\n\n ```"
 			},
 			"response": []
@@ -64,7 +75,17 @@
 						}
 					}
 				},
-				"url": "localhost:8080/speech/save-speech",
+				"url": {
+					"raw": "localhost:8080/speech/save-speech",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"speech",
+						"save-speech"
+					]
+				},
 				"description": "### POST /speech/save-speech\n\nThis endpoint is used to save a speech with the provided author, speech date, content, and keywords.\n\n#### Request Body\n\n- `author` (string): The name of the author of the speech.\n    \n- `speechDate` (string): The date of the speech in the format YYYY-MM-DD.\n    \n- `content` (string): The content of the speech.\n    \n- `keywords` (array): An array of keywords associated with the speech, where each keyword has a `keyword` property.\n    \n\n#### Response\n\nThe response is in JSON format with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"number\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```\n\n- `status` (number): The status code of the response.\n    \n- `message` (string): A message indicating the result of the request."
 			},
 			"response": []
@@ -86,7 +107,17 @@
 						}
 					}
 				},
-				"url": "localhost:8080/speech/edit-speech",
+				"url": {
+					"raw": "localhost:8080/speech/edit-speech",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"speech",
+						"edit-speech"
+					]
+				},
 				"description": "### Edit Speech\n\nThis endpoint allows the user to edit a speech by providing the speech ID, author, speech date, content, and keywords.\n\n#### Request Body\n\n- `id` (string) - The ID of the speech to be edited.\n    \n- `author` (string) - The name of the author of the speech.\n    \n- `speechDate` (string) - The date of the speech in the format \"YYYY-MM-DD\".\n    \n- `content` (string) - The content of the speech.\n    \n- `keywords` (array) - An array of keywords associated with the speech, where each keyword has a `keyword` property.\n    \n\n#### Response\n\nThe response is a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"number\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```\n\nThe response contains the following fields:\n\n- `status` (number) - The status code of the response.\n    \n- `message` (string) - A message related to the status of the response."
 			},
 			"response": []
@@ -96,7 +127,18 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"url": "localhost:8080/speech/delete-speech/1161ce0e-2279-403c-9619-62e27e65d648",
+				"url": {
+					"raw": "localhost:8080/speech/delete-speech/1161ce0e-2279-403c-9619-62e27e65d648",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"speech",
+						"delete-speech",
+						"1161ce0e-2279-403c-9619-62e27e65d648"
+					]
+				},
 				"description": "### DELETE /speech/delete-speech/{speechId}\n\nThis endpoint is used to delete a specific speech identified by its ID.\n\n#### Request\n\n- Path Parameters\n    \n    - `speechId` (string, required): The ID of the speech to be deleted.\n        \n\n#### Response\n\n- Status: 200\n    \n- Content-Type: application/json\n    \n\n``` json\n{\n    \"status\": 0,\n    \"message\": \"\"\n}\n\n ```\n\nThe response returns a JSON object with a `status` indicating the result of the deletion operation, and a `message` providing additional information if applicable."
 			},
 			"response": []
