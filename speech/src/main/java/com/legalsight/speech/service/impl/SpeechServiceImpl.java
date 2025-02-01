@@ -10,13 +10,13 @@ import com.legalsight.speech.repository.specification.SearchOperation;
 import com.legalsight.speech.repository.specification.SpeechJPASpec;
 import com.legalsight.speech.service.SpeechService;
 import jakarta.transaction.Transactional;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 @Slf4j
@@ -28,18 +28,26 @@ public class SpeechServiceImpl implements SpeechService {
   private final SpeechMapper speechMapper;
 
   @Override
-  public List<SpeechDTO> searchSpeeches(String author, Date startDate, Date endDate,
+  public List<SpeechDTO> searchSpeeches(String author, LocalDate startDate, LocalDate endDate,
       String content, List<String> keywords) {
 
     SpeechJPASpec spec = new SpeechJPASpec();
     if (keywords != null && !keywords.isEmpty()) {
       spec.addCriteria(new SearchCriteria("keywords.keyword", keywords, SearchOperation.IN));
     }
-    if (author != null && !author.isBlank()) {
+    if (StringUtils.hasText(author)) {
       spec.addCriteria(new SearchCriteria("author", author, SearchOperation.LIKE));
     }
-    if (content != null && !content.isBlank()) {
+    if (StringUtils.hasText(content)) {
       spec.addCriteria(new SearchCriteria("content", content, SearchOperation.LIKE));
+    }
+    if (startDate != null) {
+      spec.addCriteria(
+          new SearchCriteria("speechDate", startDate, SearchOperation.GREATER_THAN_EQUAL));
+    }
+
+    if (endDate != null) {
+      spec.addCriteria(new SearchCriteria("speechDate", endDate, SearchOperation.LESS_THAN_EQUAL));
     }
 
     List<SpeechJPA> speeches = speechRepository.findAll(spec);

@@ -3,8 +3,7 @@ package com.legalsight.speech.controller;
 import com.legalsight.speech.dto.SpeechDTO;
 import com.legalsight.speech.model.GenericResponse;
 import com.legalsight.speech.service.SpeechService;
-import java.util.ArrayList;
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import lombok.extern.slf4j.Slf4j;
@@ -31,8 +30,8 @@ public class SpeechController {
 
   @GetMapping(value = "/get-speeches")
   public ResponseEntity<List<SpeechDTO>> getSpeeches(@RequestParam(required = false) String author,
-      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date startDate,
-      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date endDate,
+      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
       @RequestParam(required = false) String content,
       @RequestParam(required = false) List<String> keywords) {
 
