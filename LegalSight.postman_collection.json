@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "05930f21-0993-4ef2-9570-1975295eeb12",
+		"name": "LegalSight",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "19909826",
+	},
+	"item": [
+		{
+			"name": "Get Speeches",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/speech/get-speeches?content=anyone out there who still doubts that America&startDate=1960-01-20&endDate=2018-12-05",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"speech",
+						"get-speeches"
+					],
+					"query": [
+						{
+							"key": "content",
+							"value": "anyone out there who still doubts that America"
+						},
+						{
+							"key": "startDate",
+							"value": "1960-01-20"
+						},
+						{
+							"key": "endDate",
+							"value": "2018-12-05"
+						}
+					]
+				},
+				"description": "The `GET` request retrieves speeches based on the provided content, start date, and end date. The response is a JSON array containing objects with the following schema:\n\n``` json\n[\n  {\n    \"id\": \"\",\n    \"author\": \"\",\n    \"speechDate\": \"\",\n    \"content\": \"\",\n    \"keywords\": [\n      {\n        \"id\": \"\",\n        \"keyword\": \"\"\n      }\n    ]\n  }\n]\n\n ```\n\nThis schema represents the structure of the response where each object contains the id, author, speech date, content, and an array of keywords with their respective id and keyword."
+			},
+			"response": []
+		},
+		{
+			"name": "Get Speech",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/speech/get-speech/f8c58b18-88ff-4518-aaf2-6e9eebd66d64",
+				"description": "The endpoint \"localhost:8080/speech/get-speech/{speechId}\" retrieves a speech with the specified ID.\n\nThe response for this request can be documented as a JSON schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"id\": {\"type\": \"string\"},\n    \"author\": {\"type\": \"string\"},\n    \"speechDate\": {\"type\": \"string\"},\n    \"content\": {\"type\": \"string\"},\n    \"keywords\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"id\": {\"type\": \"string\"},\n          \"keyword\": {\"type\": \"string\"}\n        }\n      }\n    }\n  }\n}\n}\n\n ```"
+			},
+			"response": []
+		},
+		{
+			"name": "Save Speech",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"author\": \"Jino John\",\r\n    \"speechDate\": \"2025-01-29\",\r\n    \"content\": \"you live once, enjoy life. have fun.\",\r\n    \"keywords\": [\r\n        {\r\n            \"keyword\": \"live\"\r\n        },\r\n        {\r\n            \"keyword\": \"enjoy\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/speech/save-speech",
+				"description": "### POST /speech/save-speech\n\nThis endpoint is used to save a speech with the provided author, speech date, content, and keywords.\n\n#### Request Body\n\n- `author` (string): The name of the author of the speech.\n    \n- `speechDate` (string): The date of the speech in the format YYYY-MM-DD.\n    \n- `content` (string): The content of the speech.\n    \n- `keywords` (array): An array of keywords associated with the speech, where each keyword has a `keyword` property.\n    \n\n#### Response\n\nThe response is in JSON format with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"number\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```\n\n- `status` (number): The status code of the response.\n    \n- `message` (string): A message indicating the result of the request."
+			},
+			"response": []
+		},
+		{
+			"name": "Edit Speech",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"1161ce0e-2279-403c-9619-62e27e65d648\",\r\n    \"author\": \"Jino John\",\r\n    \"speechDate\": \"2025-01-29\",\r\n    \"content\": \"you live once, enjoy life. have fun as much as you can.\",\r\n    \"keywords\": [\r\n        {\r\n            \"keyword\": \"live more\"\r\n        },\r\n        {\r\n            \"keyword\": \"enjoy more\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/speech/edit-speech",
+				"description": "### Edit Speech\n\nThis endpoint allows the user to edit a speech by providing the speech ID, author, speech date, content, and keywords.\n\n#### Request Body\n\n- `id` (string) - The ID of the speech to be edited.\n    \n- `author` (string) - The name of the author of the speech.\n    \n- `speechDate` (string) - The date of the speech in the format \"YYYY-MM-DD\".\n    \n- `content` (string) - The content of the speech.\n    \n- `keywords` (array) - An array of keywords associated with the speech, where each keyword has a `keyword` property.\n    \n\n#### Response\n\nThe response is a JSON object with the following schema:\n\n``` json\n{\n  \"type\": \"object\",\n  \"properties\": {\n    \"status\": {\n      \"type\": \"number\"\n    },\n    \"message\": {\n      \"type\": \"string\"\n    }\n  }\n}\n\n ```\n\nThe response contains the following fields:\n\n- `status` (number) - The status code of the response.\n    \n- `message` (string) - A message related to the status of the response."
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Speech",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": "localhost:8080/speech/delete-speech/1161ce0e-2279-403c-9619-62e27e65d648",
+				"description": "### DELETE /speech/delete-speech/{speechId}\n\nThis endpoint is used to delete a specific speech identified by its ID.\n\n#### Request\n\n- Path Parameters\n    \n    - `speechId` (string, required): The ID of the speech to be deleted.\n        \n\n#### Response\n\n- Status: 200\n    \n- Content-Type: application/json\n    \n\n``` json\n{\n    \"status\": 0,\n    \"message\": \"\"\n}\n\n ```\n\nThe response returns a JSON object with a `status` indicating the result of the deletion operation, and a `message` providing additional information if applicable."
+			},
+			"response": []
+		}
+	]
+}
