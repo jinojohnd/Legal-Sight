@@ -20,6 +20,7 @@
 
 Make sure you have the following installed:
 
+- Create a folder - LegalSight under C drive. This is where the offline H2 db is created
 - Java 21 or later
 - Maven (for building the project)
 
